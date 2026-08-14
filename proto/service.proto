@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+// Описываем структуру входящего запроса (bodyPatterns -> name)
+message UserRequest {
+    string name = 1;
+}
+
+// Описываем структуру ответа сервера (body -> greeting)
+message UserResponse {
+    string greeting = 1;
+}
+
+// Имя сервиса и метода должны строго совпадать с urlPath: /UserService/GetUserProfile
+service UserService {
+    rpc GetUserProfile (UserRequest) returns (UserResponse);
+}

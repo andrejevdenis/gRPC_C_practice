@@ -115,3 +115,37 @@ target_link_libraries(grpc_cpu_tests PRIVATE
     protobuf::libprotobuf 
     grpc++
 )
+
+# -----------------------------------------------------------------------------
+# ТЕСТ 3: Тестирование таймаутов (Будет собран файл grpc_timeout_tests.exe)
+# -----------------------------------------------------------------------------
+add_executable(grpc_timeout_tests "tests/grpc_timeout_test.cpp")
+
+# Подключаем сгенерированные файлы gRPC
+target_sources(grpc_timeout_tests PRIVATE 
+    "${GENERATED_DIR}/service.pb.cc" 
+    "${GENERATED_DIR}/service.grpc.pb.cc"
+)
+# Открываем доступ к заголовочным файлам
+target_include_directories(grpc_timeout_tests PRIVATE ${GENERATED_DIR} ${INCLUDE_DIR})
+
+# Линкуем общие библиотеки
+target_link_libraries(grpc_timeout_tests PRIVATE 
+    gtest_main 
+    protobuf::libprotobuf 
+    grpc++
+)
+
+# -----------------------------------------------------------------------------
+# ТЕСТ 4: Тест стабильности и замера времени (Будет собран файл grpc_soak_tests.exe)
+# -----------------------------------------------------------------------------
+add_executable(grpc_soak_tests "tests/grpc_soak_test.cpp")
+
+target_sources(grpc_soak_tests PRIVATE 
+    "${GENERATED_DIR}/service.pb.cc" 
+    "${GENERATED_DIR}/service.grpc.pb.cc"
+)
+
+target_include_directories(grpc_soak_tests PRIVATE ${GENERATED_DIR} ${INCLUDE_DIR})
+
+target_link_libraries(grpc_soak_tests PRIVATE gtest_main protobuf::libprotobuf grpc++)

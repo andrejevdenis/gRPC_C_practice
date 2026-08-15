@@ -11,7 +11,7 @@
 #include "service.pb.h"       
 #include "service.grpc.pb.h"  
 
-TEST(GrpcUserOopTest, PerformanceBenchmark) {
+TEST(GrpcCPURPSTest, PerformanceBenchmark) {
     // 1. Инициализируем компоненты одной строчкой
     FakeUserServer server;
     UserGrpcClient client(server.GetInProcessChannel());
